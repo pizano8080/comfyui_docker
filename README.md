@@ -1,64 +1,260 @@
-\# create a docker compose folder for install files
+\# ComfyUI Docker
 
-mkdir comfyui-docker
 
-\# unzip/copy all of the install files inside folder you created
 
-cd comfyui-docker
+Docker setup for running \*\*ComfyUI\*\* with Docker Compose.
+
+
+
+\*\*GitHub:\*\* \[pizano8080/comfyui\_docker](https://github.com/pizano8080/comfyui\_docker?utm\_source=chatgpt.com)
+
+
+
+\## Installation
+
+
+
+\### 1. Clone the repository
+
+
+
+```bash
+
+git clone https://github.com/pizano8080/comfyui\_docker.git
+
+cd comfyui\_docker
+
+```
+
+
+
+\### 2. Build and start ComfyUI
+
+
+
+```bash
 
 docker compose up -d --build
 
-\# wait for container to build
+```
 
-open docker desktop
 
-press triple dots and press view details to watch logs
 
-\# wait for cache to update
+The first build may take some time.
 
-&#x20;    # should see something like below when cache is rebuilt and completed
 
-&#x20;    FETCH ComfyRegistry Data: 160/164
 
-&#x20;    FETCH ComfyRegistry Data \[DONE]
+\### 3. Monitor the build
 
-&#x20;    \[INFO] \[ComfyUI-Manager] default cache updated: https://api.comfy.org/nodes
 
-\# command to check logs at cmd prompt
+
+Open \*\*Docker Desktop\*\*.
+
+
+
+Find the `comfyui` container and select:
+
+
+
+\*\*⋮ → View details\*\*
+
+
+
+Use the logs to monitor the container startup and cache update.
+
+
+
+Wait for the ComfyRegistry cache to finish updating. You should eventually see something similar to:
+
+
+
+```text
+
+FETCH ComfyRegistry Data: 160/164
+
+
+
+FETCH ComfyRegistry Data \[DONE]
+
+
+
+\[INFO] \[ComfyUI-Manager] default cache updated: https://api.comfy.org/nodes
+
+```
+
+
+
+You can also check the logs from a command prompt:
+
+
+
+```bash
 
 docker logs --tail 50 comfyui
 
-Open Comfyui
-
-Open Manager
-
-Press Update All in menu.
-
-Restart
-
-after restart use Manager to Install any missing nodes
+```
 
 
 
+\## First-Time Setup
 
 
-\#Quick maintenance:
+
+Once ComfyUI has finished starting:
+
+
+
+1\. Open ComfyUI.
+
+2\. Open \*\*ComfyUI Manager\*\*.
+
+3\. Select \*\*Update All\*\*.
+
+4\. Restart ComfyUI.
+
+5\. After restarting, use Manager to install any missing custom nodes.
+
+
+
+\## Updating
+
+
+
+Pull the latest files from GitHub:
+
+
+
+```bash
+
+git pull origin main
+
+```
+
+
+
+If the Docker files changed, rebuild the container:
+
+
+
+```bash
+
+docker compose up -d --build
+
+```
+
+
+
+\## Quick Maintenance
+
+
+
+Update packages inside the running container:
+
+
+
+```bash
 
 docker exec comfyui sh -c "apt-get update \&\& apt-get upgrade -y"
 
+```
 
 
-\#Full refresh:
+
+\## Full Refresh
+
+
+
+Pull the latest Docker base images and rebuild:
+
+
+
+```bash
 
 docker compose build --pull
 
 docker compose up -d
 
-&#x20;
+```
 
 
 
-\#purge (make sure what you want to keep is running):
+\## Docker Cleanup
+
+
+
+\*\*Warning:\*\* This removes unused Docker images, containers, networks, and volumes. Make sure anything you want to keep is backed up before running this command.
+
+
+
+```bash
 
 docker system prune -a --volumes
+
+```
+
+
+
+\## Useful Commands
+
+
+
+\### View recent logs
+
+
+
+```bash
+
+docker logs --tail 50 comfyui
+
+```
+
+
+
+\### Follow logs live
+
+
+
+```bash
+
+docker logs -f comfyui
+
+```
+
+
+
+\### Check running containers
+
+
+
+```bash
+
+docker ps
+
+```
+
+
+
+\### Stop ComfyUI
+
+
+
+```bash
+
+docker compose down
+
+```
+
+
+
+\### Start ComfyUI
+
+
+
+```bash
+
+docker compose up -d
+
+```
+
+
 
