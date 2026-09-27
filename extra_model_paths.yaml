@@ -1,0 +1,70 @@
+#Rename this to extra_model_paths.yaml and ComfyUI will load it
+
+#config for comfyui
+#your base path should be either an existing comfy install or a central folder where you store all of your models, loras, etc.
+
+comfyui:
+      base_path: /models
+#     # You can use is_default to mark that these folders should be listed first, and used as the default dirs for eg downloads
+#     #is_default: true
+      checkpoints: checkpoints/
+      configs: configs/
+      loras: loras/
+      vae: vae/
+      text_encoders: |
+           text_encoders/
+           clip/
+      diffusion_models: |
+           unet/
+           diffusion_models/
+      clip_vision: clip_vision/
+      style_models: style_models/
+      embeddings: embeddings/
+      diffusers: diffusers/
+      vae_approx: vae_approx/
+      controlnet: |
+           controlnet/
+           t2i_adapter/
+      gligen: gligen/
+      upscale_models: upscale_models/
+      latent_upscale_models: latent_upscale_models/
+#     custom_nodes: custom_nodes/
+      hypernetworks: hypernetworks/
+      photomaker: photomaker/
+      classifiers: classifiers/
+      model_patches: model_patches/
+      audio_encoders: audio_encoders/
+      background_removal: background_removal/
+      frame_interpolation: frame_interpolation/
+      geometry_estimation: geometry_estimation/
+      optical_flow: optical_flow/
+      detection: detection/
+
+
+#config for a1111 ui
+#all you have to do is uncomment this (remove the #) and change the base_path to where yours is installed
+
+#a1111:
+#     base_path: path/to/stable-diffusion-webui/
+#     checkpoints: models/Stable-diffusion
+#     configs: models/Stable-diffusion
+#     vae: models/VAE
+#     loras: |
+#          models/Lora
+#          models/LyCORIS
+#     upscale_models: |
+#                   models/ESRGAN
+#                   models/RealESRGAN
+#                   models/SwinIR
+#     embeddings: embeddings
+#     hypernetworks: models/hypernetworks
+#     controlnet: models/ControlNet
+
+
+# For the canonical list of supported keys and extensions, see folder_paths.py.
+
+#other_ui:
+#    base_path: path/to/ui
+#    checkpoints: models/checkpoints
+#    gligen: models/gligen
+#    custom_nodes: path/custom_nodes

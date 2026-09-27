@@ -1,0 +1,40 @@
+name: comfyui_docker
+
+services:
+  comfyui:
+    build:
+      context: .
+      dockerfile: Dockerfile
+
+    image: comfyui:latest
+    container_name: comfyui
+
+    ports:
+      - "8188:8188"
+
+    volumes:
+      - ../workspace/comfyui:/app/ComfyUI
+      - ../workspace/workflows:/app/ComfyUI/user/default/workflows
+      - ../workspace/custom_nodes:/app/ComfyUI/custom_nodes
+      - ../workspace/models:/models
+      - ../workspace/input:/input
+      - ../workspace/output:/output
+
+    working_dir: /app/ComfyUI
+
+    gpus: all
+
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all
+
+    restart: unless-stopped
+
+    command:
+      - python
+      - main.py
+      - --listen
+      - 0.0.0.0
+      - --input-directory
+      - /input
+      - --output-directory
+      - /output
