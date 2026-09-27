@@ -6,7 +6,7 @@ Docker setup for running \*\*ComfyUI\*\* with Docker Compose.
 
 
 
-\*\*GitHub:\*\* \[pizano8080/comfyui\_docker](https://github.com/pizano8080/comfyui\_docker?utm\_source=chatgpt.com)
+\*\*GitHub:\*\* \[pizano8080/comfyui\_docker]
 
 
 
