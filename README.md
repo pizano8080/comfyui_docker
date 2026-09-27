@@ -6,7 +6,7 @@ Docker setup for running \*\*ComfyUI\*\* with Docker Compose.
 
 
 
-\*\*GitHub:\*\* \[pizano8080/comfyui\_docker]
+\*\*GitHub:\*\* \[pizano8080/comfyui_docker]
 
 
 
@@ -20,9 +20,9 @@ Docker setup for running \*\*ComfyUI\*\* with Docker Compose.
 
 ```bash
 
-git clone https://github.com/pizano8080/comfyui\_docker.git
+git clone https://github.com/pizano8080/comfyui_docker.git
 
-cd comfyui\_docker
+cd comfyui_docker
 
 ```
 
