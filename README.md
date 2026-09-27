@@ -66,25 +66,12 @@ Use the logs to monitor the container startup and cache update.
 
 Wait for the ComfyRegistry cache to finish updating. You should eventually see something similar to:
 
+  FETCH ComfyRegistry Data: 160/164
+  FETCH ComfyRegistry Data \[DONE]
+  [INFO] [ComfyUI-Manager] default cache updated: https://api.comfy.org/nodes
 
 
-```text
-
-FETCH ComfyRegistry Data: 160/164
-
-
-
-FETCH ComfyRegistry Data \[DONE]
-
-
-
-\[INFO] \[ComfyUI-Manager] default cache updated: https://api.comfy.org/nodes
-
-```
-
-
-
-You can also check the logs from a command prompt:
+You can also check the logs from a command prompt/powershell/bash shell:
 
 
 
@@ -154,7 +141,7 @@ Update packages inside the running container:
 
 ```bash
 
-docker exec comfyui sh -c "apt-get update \&\& apt-get upgrade -y"
+docker exec comfyui sh -c "apt-get update && apt-get upgrade -y"
 
 ```
 
