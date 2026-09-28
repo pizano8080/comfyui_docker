@@ -49,9 +49,9 @@ if [ ! -f "$UPDATE_MARKER"  ]; then
     pip install \
       -r requirements.txt
 	  
-	pip install torchaudio
-        pip install sageattention
-	pip install sqlalchemy
+    pip install torchaudio
+    pip install sageattention
+    pip install sqlalchemy
 
     if [ -e /dev/kfd ]; then
         echo "=== AMD ROCm GPU detected ==="
