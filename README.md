@@ -9,24 +9,22 @@ Docker setup for running **ComfyUI** with Docker Compose.
 ### 1. Clone the repository
 
 ```bash
-
 git clone https://github.com/pizano8080/comfyui_docker.git
 
 cd comfyui_docker
-
 ```
 
-### 2. Build and start ComfyUI
+### 2. First Run
+
+For the first run, build and start the container with:
 
 ```bash
-
 docker compose up -d --build
-
 ```
 
 The first build may take some time.
 
-### 3. Monitor the build
+### 3. Monitor the Build
 
 Open **Docker Desktop**.
 
@@ -47,9 +45,7 @@ FETCH ComfyRegistry Data [DONE]
 You can also check the logs from a command prompt/powershell/bash shell:
 
 ```bash
-
 docker logs --tail 50 comfyui
-
 ```
 
 ## Why This Docker Setup Is Different
@@ -99,94 +95,96 @@ Once ComfyUI has finished starting:
 4. Restart ComfyUI.
 5. After restarting, use Manager to install any missing custom nodes.
 
+## Starting ComfyUI
+
+Once ComfyUI has been correctly installed and the container is working, use:
+
+```bash
+docker compose start
+```
+
+**Do not use `docker compose up -d` to simply start the existing container.**
+
+`docker compose up -d` can remove and recreate the container. Since ComfyUI and its requirements are installed into the container rather than built into the image, the newly created container will only have the basic Docker image.
+
+If the container has been recreated, you can force ComfyUI to be installed again by removing the `.DONOTUPDATE` file:
+
+```bash
+rm ../workspace/comfyui/.DONOTUPDATE
+```
+
 ## Updating
 
 Pull the latest files from GitHub:
 
 ```bash
-
 git pull origin main
-
 ```
 
-If the Docker files changed, rebuild the container:
+## Rebuilding
+
+Rebuild when you want to update the **Docker and ComfyUI environment**, or when you change Docker installation files such as `Dockerfile` or `entrypoint.sh`.
+
+Before rebuilding, remove the `.DONOTUPDATE` file:
 
 ```bash
-
-docker compose up -d --build
-
+rm ../workspace/comfyui/.DONOTUPDATE
 ```
+
+Then rebuild and start the container:
+
+```bash
+docker compose up -d --build
+```
+
+Removing `.DONOTUPDATE` causes the entrypoint to download ComfyUI and reinstall the requirements after the rebuild.
 
 ## Quick Maintenance
 
 Update packages inside the running container:
 
 ```bash
-
 docker exec comfyui sh -c "apt-get update && apt-get upgrade -y"
-
 ```
 
-## Full Refresh
-
-Pull the latest Docker base images and rebuild:
-
-```bash
-
-docker compose build --pull
-
-docker compose up -d
-
-```
-
-## Docker Cleanup
-
-**Warning:** This removes unused Docker images, containers, networks, and volumes. Make sure anything you want to keep is backed up before running this command.
-
-```bash
-
-docker system prune -a --volumes
-
-```
 
 ## Useful Commands
 
 ### View recent logs
 
 ```bash
-
 docker logs --tail 50 comfyui
-
 ```
 
 ### Follow logs live
 
 ```bash
-
 docker logs -f comfyui
-
 ```
 
 ### Check running containers
 
 ```bash
-
 docker ps
-
 ```
 
 ### Stop ComfyUI
 
 ```bash
-
-docker compose down
-
+docker compose stop
 ```
 
 ### Start ComfyUI
 
 ```bash
-
-docker compose up -d
-
+docker compose start
 ```
+
+## Docker Cleanup
+
+**Warning:** THIS DELETES EVERYTHING THAT IS NOT RUNNING!!!!  BE VERY CAREFUL RUNNING THIS COMMAND!!!!!!   This removes unused Docker images, containers, networks, and volumes. Make sure anything you want to keep is backed up before running this command.
+
+```bash
+docker system prune -a --volumes
+```
+
