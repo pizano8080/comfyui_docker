@@ -221,3 +221,40 @@ docker compose start
 docker system prune -a --volumes
 ```
 
+## Known Issue — ComfyUI Database Migration
+
+### [ERROR] Failed to initialize database - `0008_drop_asset_meta` Database Error
+
+A recent ComfyUI update can cause the following database error when using **ComfyUI Manager → Update All**:
+
+```text
+[ERROR] Failed to initialize database. Please ensure you have installed the latest requirements. If the error persists, please report this as in future the database will be required: Can't locate revision identified by '0008_drop_asset_meta'
+```
+
+This issue was **not occurring with earlier ComfyUI versions** and has been reproduced on a fresh installation using the current ComfyUI installation process.
+
+The error is related to the ComfyUI **Alembic database migration history**. The existing SQLite database references the migration revision `0008_drop_asset_meta`, but the updated ComfyUI installation cannot locate that revision in its current migration chain.
+
+### Recovery
+
+For a fresh installation, or when the ComfyUI database contents are not important, simply delete:
+
+```text
+/workspace/comfyui/user/comfyui.db
+```
+
+Then restart the ComfyUI container.
+
+ComfyUI will automatically create a new `comfyui.db` database using the current migration structure.
+
+**Only `comfyui.db` needs to be deleted.** Do not delete the entire `user` directory.
+
+### Current Status
+
+This appears to be a **recent ComfyUI/ComfyUI Manager migration issue**, rather than a problem with this Docker/Compose installation.
+
+The Docker installation starts and operates normally before the ComfyUI update. The database error occurs after using the ComfyUI Manager update process.
+
+Until the upstream migration issue is resolved, be aware that **Manager → Update All** may cause the database migration error.
+
+If the database contains important ComfyUI data, back up `comfyui.db` before performing ComfyUI updates.
