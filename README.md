@@ -234,7 +234,9 @@ docker system prune -a --volumes
 Running **ComfyUI Manager → Update All** after a fresh install might cause this error:
 
 ```text
-[ERROR] Failed to initialize database. Please ensure you have installed the latest requirements. If the error persists, please report this as in future the database will be required: Can't locate revision identified by '0008_drop_asset_meta'
+   [ERROR] Failed to initialize database. Please ensure you have installed the latest requirements. 
+   If the error persists, please report this as in future the database will be required: Can't locate 
+   revision identified by '0008_drop_asset_meta'
 ```
 
 This issue was **not occurring with other ComfyUI versions** and has been reproduced on a fresh installation using the current ComfyUI installation process.
