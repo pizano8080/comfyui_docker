@@ -113,7 +113,7 @@ If the container has been recreated, you can force ComfyUI to be installed again
 rm ../workspace/comfyui/.DONOTUPDATE
 ```
 
-## Updating
+## Updating GitHub Files
 
 Pull the latest files from GitHub:
 
@@ -168,13 +168,13 @@ docker logs -f comfyui
 docker ps
 ```
 
-### Stop ComfyUI
+### Stop Docker Compose Container
 
 ```bash
 docker compose stop
 ```
 
-### Start ComfyUI
+### Start Docker Compose Container
 
 ```bash
 docker compose start
