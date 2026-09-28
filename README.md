@@ -180,11 +180,12 @@ docker compose stop
 docker compose start
 ```
 
-## Docker Cleanup
+### Docker Cleanup
 
-**Warning:** THIS DELETES EVERYTHING THAT IS NOT RUNNING!!!!  BE VERY CAREFUL RUNNING THIS COMMAND!!!!!!   This removes unused Docker images, containers, networks, and volumes. Make sure anything you want to keep is backed up before running this command.
+**Warning: THIS DELETES EVERYTHING THAT IS NOT RUNNING!!!!  BE VERY CAREFUL RUNNING THIS COMMAND!!!!!!**  This removes unused Docker images, containers, networks, and volumes. Make sure anything you want to keep is backed up before running this command.
 
 ```bash
 docker system prune -a --volumes
 ```
+
 
