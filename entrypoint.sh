@@ -98,14 +98,10 @@ if [ ! -f "$UPDATE_MARKER"  ]; then
               "$target"
         fi
 
-        if [ -f "$target/requirements.txt" ]; then
-
-            pip install \
-              -r "$target/requirements.txt"
-
-        fi
 
     done
+
+    echo "=== Installing custom nodes requirements ==="
 
     for target in "$CN_DIR"/*; do
 
