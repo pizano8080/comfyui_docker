@@ -39,21 +39,22 @@ if [ ! -f "$UPDATE_MARKER"  ]; then
 
     rm -rf "$TEMP_DIR"
 
+
     MODEL_SOURCE="$COMFY_DIR/models"
     MODEL_TARGET="/models"
 
     if [ -d "$MODEL_SOURCE" ]; then
         echo "=== Checking model directories ==="
 
-        find "$MODEL_SOURCE" -type d | while read -r dir; do
-            relative="${dir#$MODEL_SOURCE/}"
+        while IFS= read -r -d '' dir; do
+            relative="${dir#"$MODEL_SOURCE"/}"
             target="$MODEL_TARGET/$relative"
 
             if [ ! -d "$target" ]; then
                 echo "Creating model directory: $relative"
                 mkdir -p "$target"
             fi
-        done
+        done < <(find "$MODEL_SOURCE" -mindepth 1 -type d -print0)
     fi
 
     cd "$COMFY_DIR"
@@ -105,6 +106,7 @@ if [ ! -f "$UPDATE_MARKER"  ]; then
         fi
 
     done
+
 
     touch "$UPDATE_MARKER"
 

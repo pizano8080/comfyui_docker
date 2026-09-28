@@ -39,6 +39,7 @@ comfyui:
       geometry_estimation: geometry_estimation/
       optical_flow: optical_flow/
       detection: detection/
+      sams: sams/
 
 
 #config for a1111 ui

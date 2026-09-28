@@ -89,9 +89,11 @@ Use the logs to monitor the container startup and cache update.
 Wait for the ComfyRegistry cache to finish updating. You should eventually see something similar to:
 
 ```text
-FETCH ComfyRegistry Data: 160/164
-FETCH ComfyRegistry Data [DONE]
-[INFO] [ComfyUI-Manager] default cache updated: https://api.comfy.org/nodes
+    [INFO] To see the GUI go to: http://0.0.0.0:8188
+    FETCH ComfyRegistry Data [DONE]
+    [INFO] [ComfyUI-Manager] default cache updated: https://api.comfy.org/nodes
+    FETCH DATA from: https://raw.githubusercontent.com/ltdrdata/ComfyUI-Manager/main/custom-node-list.json [DONE]
+   [INFO] [ComfyUI-Manager] All startup tasks have been completed.
 ```
 
 You can also check the logs from a command prompt/powershell/bash shell:
@@ -218,5 +220,4 @@ docker compose start
 ```bash
 docker system prune -a --volumes
 ```
-
 
