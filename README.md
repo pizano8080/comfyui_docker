@@ -227,23 +227,21 @@ docker compose start
 docker system prune -a --volumes
 ```
 
-## Known Issue — ComfyUI Database Migration
+## Known Issue with this install
 
-### [ERROR] Failed to initialize database - `0008_drop_asset_meta` Database Error
+### [ERROR] Failed to initialize database — `0008_drop_asset_meta` Database Error
 
-A recent ComfyUI update can cause the following database error when using **ComfyUI Manager → Update All**:
+Running **ComfyUI Manager → Update All** after a fresh install might cause this error:
 
 ```text
 [ERROR] Failed to initialize database. Please ensure you have installed the latest requirements. If the error persists, please report this as in future the database will be required: Can't locate revision identified by '0008_drop_asset_meta'
 ```
 
-This issue was **not occurring with earlier ComfyUI versions** and has been reproduced on a fresh installation using the current ComfyUI installation process.
-
-The error is related to the ComfyUI **Alembic database migration history**. The existing SQLite database references the migration revision `0008_drop_asset_meta`, but the updated ComfyUI installation cannot locate that revision in its current migration chain.
+This issue was **not occurring with other ComfyUI versions** and has been reproduced on a fresh installation using the current ComfyUI installation process.
 
 ### Recovery
 
-For a fresh installation, or when the ComfyUI database contents are not important, simply delete:
+If the error occurs after a fresh installation, or the ComfyUI database contents are not important, delete:
 
 ```text
 /workspace/comfyui/user/comfyui.db
@@ -251,10 +249,9 @@ For a fresh installation, or when the ComfyUI database contents are not importan
 
 Then restart the ComfyUI container.
 
-ComfyUI will automatically create a new `comfyui.db` database using the current migration structure.
+ComfyUI will automatically create a new `comfyui.db` database.
 
 **Only `comfyui.db` needs to be deleted.** Do not delete the entire `user` directory.
 
-The Docker installation starts and operates normally before the ComfyUI update. The database error occurs after using the ComfyUI Manager update process for the first time.
-
+The Docker installation starts and operates normally before the ComfyUI update. The database error occurs after using **ComfyUI Manager → Update All** for the first time.
 
