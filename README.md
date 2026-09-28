@@ -1,8 +1,60 @@
-# ComfyUI Docker
+# ComfyUI Docker Compose
 
 Docker setup for running **ComfyUI** with Docker Compose.
 
 **GitHub:** [pizano8080/comfyui_docker]
+
+
+## Why This Docker Compose Setup Is Different
+
+Traditional Docker deployments typically put the application and its dependencies directly into the Docker image:
+
+```text
+Docker Image
+├── OS / Runtime
+├── ComfyUI
+├── Python dependencies
+└── Custom nodes
+```
+
+This works well for applications that change relatively infrequently. However, **ComfyUI and its custom-node ecosystem change frequently**, with new versions, dependencies, and compatibility updates appearing regularly.
+
+This project takes a different approach:
+
+```text
+Docker Image
+├── OS / Runtime
+├── Build tools
+└── Startup environment
+
+Persistent Workspace
+├── ComfyUI
+├── Custom nodes
+├── Workflows
+└── Models
+```
+
+The container provides the environment needed to run ComfyUI, while the actual ComfyUI installation and user data are kept in persistent workspace directories.
+
+On a fresh installation, the startup script downloads the current ComfyUI version and installs its requirements and configured custom nodes. Once installed, the `.DONOTUPDATE` marker prevents the installation process from running again on every container restart.
+
+This approach means there is **no large ComfyUI Docker image to maintain**. Instead of rebuilding and publishing an image whenever ComfyUI or its dependencies change, the setup can install the current versions when a fresh environment is created.
+
+The tradeoff is that a fresh installation takes longer than starting an already-built application image. For ComfyUI, this is intentional: the goal is to keep the Docker image simple while making the ComfyUI installation flexible and easy to refresh.
+
+## Project Files
+
+The project is divided into separate files so the Docker environment, persistent data, and ComfyUI installation can be managed independently.
+
+| File                     | Description                                                                                                                                                                                                                                                                                                                                                                                                        |
+| ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `docker-compose.yml`     | Defines the ComfyUI container and its configuration. It maps the persistent workspace directories for ComfyUI, workflows, custom nodes, models, input, and output. It also controls GPU access, networking, ports, and container settings.                                                                                                                                                                         |
+| `Dockerfile`             | Builds the basic Docker environment. It uses the Python Slim image as the base and installs the operating-system packages and build tools needed by ComfyUI and its dependencies. It does **not** contain the ComfyUI installation itself.                                                                                                                                                                         |
+| `entrypoint.sh`          | Runs when the container starts and performs the ComfyUI installation. It downloads ComfyUI, installs its Python requirements, installs additional packages, and installs the configured custom nodes. The `REPOS` section can be modified to add additional custom nodes that should be installed automatically. The `.DONOTUPDATE` file prevents this installation process from running on every container start. |
+| `extra_model_paths.yaml` | Optional ComfyUI configuration for additional model locations. Rename this file, for example to `extra_model_paths.yaml.disabled`, to prevent it from being installed into ComfyUI.                                                                                                                                                                                                                                |
+| `README.md`              | Documentation for installing, configuring, updating, and maintaining this Docker setup.                                                                                                                                                                                                                                                                                                                            |
+
+
 
 ## Installation
 
@@ -47,43 +99,6 @@ You can also check the logs from a command prompt/powershell/bash shell:
 ```bash
 docker logs --tail 50 comfyui
 ```
-
-## Why This Docker Setup Is Different
-
-Traditional Docker deployments typically put the application and its dependencies directly into the Docker image:
-
-```text
-Docker Image
-├── OS / Runtime
-├── ComfyUI
-├── Python dependencies
-└── Custom nodes
-```
-
-This works well for applications that change relatively infrequently. However, **ComfyUI and its custom-node ecosystem change frequently**, with new versions, dependencies, and compatibility updates appearing regularly.
-
-This project takes a different approach:
-
-```text
-Docker Image
-├── OS / Runtime
-├── Build tools
-└── Startup environment
-
-Persistent Workspace
-├── ComfyUI
-├── Custom nodes
-├── Workflows
-└── Models
-```
-
-The container provides the environment needed to run ComfyUI, while the actual ComfyUI installation and user data are kept in persistent workspace directories.
-
-On a fresh installation, the startup script downloads the current ComfyUI version and installs its requirements and configured custom nodes. Once installed, the `.DONOTUPDATE` marker prevents the installation process from running again on every container restart.
-
-This approach means there is **no large ComfyUI Docker image to maintain**. Instead of rebuilding and publishing an image whenever ComfyUI or its dependencies change, the setup can install the current versions when a fresh environment is created.
-
-The tradeoff is that a fresh installation takes longer than starting an already-built application image. For ComfyUI, this is intentional: the goal is to keep the Docker image simple while making the ComfyUI installation flexible and easy to refresh.
 
 ## First-Time Setup
 
