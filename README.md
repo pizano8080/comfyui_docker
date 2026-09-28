@@ -139,6 +139,22 @@ docker compose up -d --build
 
 Removing `.DONOTUPDATE` causes the entrypoint to download ComfyUI and reinstall the requirements after the rebuild.
 
+
+## ComfyUI Database Initialization Issues
+
+After some ComfyUI updates or rebuilds, you may occasionally encounter a **database initialization failure** when starting ComfyUI.
+
+A simple workaround is to delete the ComfyUI database:
+
+```bash
+rm ../workspace/comfyui/user/comfyui.db
+```
+
+ComfyUI will create a new database when it starts.
+
+**Warning:** Deleting the database removes settings and other information stored specifically in the ComfyUI database. Use this only as a workaround when the database cannot be initialized.
+
+
 ## Quick Maintenance
 
 Update packages inside the running container:
