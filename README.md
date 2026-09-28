@@ -156,6 +156,12 @@ docker compose up -d --build
 
 Removing `.DONOTUPDATE` causes the entrypoint to download ComfyUI and reinstall the requirements after the rebuild.
 
+### Import Failed Nodes
+
+After running `docker compose up -d` or rebuilding the container, you might see **Import Failed** errors for some custom nodes.
+
+If this occurs, open ComfyUI-Manager and use **Try Fix** on the affected nodes. This can resolve missing or incompatible Python dependencies without requiring changes to the Docker image.
+
 
 ## ComfyUI Database Initialization Issues
 
@@ -249,12 +255,6 @@ ComfyUI will automatically create a new `comfyui.db` database using the current 
 
 **Only `comfyui.db` needs to be deleted.** Do not delete the entire `user` directory.
 
-### Current Status
+The Docker installation starts and operates normally before the ComfyUI update. The database error occurs after using the ComfyUI Manager update process for the first time.
 
-This appears to be a **recent ComfyUI/ComfyUI Manager migration issue**, rather than a problem with this Docker/Compose installation.
 
-The Docker installation starts and operates normally before the ComfyUI update. The database error occurs after using the ComfyUI Manager update process.
-
-Until the upstream migration issue is resolved, be aware that **Manager → Update All** may cause the database migration error.
-
-If the database contains important ComfyUI data, back up `comfyui.db` before performing ComfyUI updates.
