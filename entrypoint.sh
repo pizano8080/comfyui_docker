@@ -49,8 +49,23 @@ if [ ! -f "$UPDATE_MARKER"  ]; then
     pip install \
       -r requirements.txt
 	  
-	pip install sageattention
+	pip install torchaudio
+        pip install sageattention
 	pip install sqlalchemy
+
+    if [ -e /dev/kfd ]; then
+        echo "=== AMD ROCm GPU detected ==="
+
+        ROCM_VERSION=$(python -c "import urllib.request,re; s=urllib.request.urlopen('https://download.pytorch.org/whl/').read().decode(); v=re.findall(r'href=\"(rocm[0-9.]+)/\"',s); print(sorted(set(v),key=lambda x:tuple(map(int,x[4:].split('.'))))[-1])")
+
+        echo "=== Latest ROCm wheel: $ROCM_VERSION ==="
+
+        pip uninstall -y torch torchvision torchaudio
+
+        pip install torch torchvision torchaudio \
+          --index-url "https://download.pytorch.org/whl/$ROCM_VERSION"
+    fi
+
 
     mkdir -p "$CN_DIR"
 

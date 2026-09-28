@@ -22,11 +22,26 @@ services:
 
     working_dir: /app/ComfyUI
 
-    gpus: all
+    
+    ############################## GPU SECTION ###########################################
+    # Comment out NVIDIA and AMD entries for CPU
+ 
 
+    # NVIDIA GPU - Keep this line commented out - uncomment below for nvidia settings
+    gpus: all
     environment:
       - NVIDIA_VISIBLE_DEVICES=all
 
+
+    # AMD / ROCm GPU - Keep this line commented out - uncomment below for nvidia settings
+    # devices:
+    #   - /dev/kfd:/dev/kfd
+    #   - /dev/dri:/dev/dri
+
+
+    ######################################################################################
+    
+    
     restart: unless-stopped
 
     command:
