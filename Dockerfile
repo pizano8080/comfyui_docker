@@ -5,6 +5,7 @@ RUN apt-get update \
       git \
       build-essential \
       cmake \
+      ffmpeg \
       ninja-build \
       libgl1 \
       libglx-mesa0 \

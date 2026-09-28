@@ -107,6 +107,16 @@ if [ ! -f "$UPDATE_MARKER"  ]; then
 
     done
 
+    for target in "$CN_DIR"/*; do
+
+        if [ -d "$target" ] && [ -f "$target/requirements.txt" ]; then
+
+            pip install \
+              -r "$target/requirements.txt"
+
+        fi
+
+    done
 
     touch "$UPDATE_MARKER"
 
