@@ -9,20 +9,22 @@ UPDATE_MARKER="$COMFY_DIR/.DONOTUPDATE"
 CN_DIR="$COMFY_DIR/custom_nodes"
 
 
-# OLD Custom Node - ["ComfyUI_UltimateSDUpscale"]="https://github.com/ssitu/ComfyUI_UltimateSDUpscale.git"
-# OLD Custom Node - ["ComfyUI_essentials"]="https://github.com/cubiq/ComfyUI_essentials.git"
-# OLD Custom Node - ["ComfyUI-Crystools"]="https://github.com/crystian/ComfyUI-Crystools.git"
-
 declare -A REPOS=(
 
+# OLD Custom Nodes commented out
+
+#["ComfyUI_UltimateSDUpscale"]="https://github.com/ssitu/ComfyUI_UltimateSDUpscale.git"    
+#["ComfyUI_essentials"]="https://github.com/cubiq/ComfyUI_essentials.git"
+#["ComfyUI-Crystools"]="https://github.com/crystian/ComfyUI-Crystools.git"
+
+
+# Custom_nodes to install during install
+
 ["ComfyUI-Manager"]="https://github.com/ltdrdata/ComfyUI-Manager.git"
-
 ["rgthree-comfy"]="https://github.com/rgthree/rgthree-comfy.git"
-
 ["ComfyUI-KJNodes"]="https://github.com/kijai/ComfyUI-KJNodes.git"
 
 )
-
 
 
 if [ ! -f "$UPDATE_MARKER"  ]; then
