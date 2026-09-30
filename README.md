@@ -54,6 +54,27 @@ The project is divided into separate files so the Docker environment, persistent
 | `extra_model_paths.yaml` | Optional ComfyUI configuration for additional model locations. Rename this file, for example to `extra_model_paths.yaml.disabled`, to prevent it from being installed into ComfyUI.                                                                                                                                                                                                                                |
 | `README.md`              | Documentation for installing, configuring, updating, and maintaining this Docker setup.                                                                                                                                                                                                                                                                                                                            |
 
+## `extra_model_paths.yaml`
+
+The `extra_model_paths.yaml` file is copied into the ComfyUI installation during the Docker image build.
+
+If you need to change the configuration, update `extra_model_paths.yaml` in the Docker Compose folder **before building**.
+
+After the build, you can also manually edit the copy in the ComfyUI directory without rebuilding.
+
+### Restore the file
+
+If you make a mistake while editing the file in the ComfyUI directory, delete it. The file will be restored from the Docker image the next time the container is recreated.
+
+### Disable the file
+
+If you do not want to use `extra_model_paths.yaml`, rename it in the Docker Compose folder before building. For example:
+
+```text
+extra_model_paths.yaml.disabled
+```
+
+Then run the normal build.
 
 
 ## Installation
