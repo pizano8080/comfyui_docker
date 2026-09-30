@@ -116,6 +116,9 @@ if [ ! -f "$UPDATE_MARKER"  ]; then
 
     done
 
+    # Added Clean up after install for pip cache 
+    pip cache purge
+
     touch "$UPDATE_MARKER"
 
 fi
