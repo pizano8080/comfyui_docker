@@ -64,7 +64,7 @@ After the build, you can also manually edit the copy in the ComfyUI directory wi
 
 ### Restore the file
 
-If you make a mistake while editing the file in the ComfyUI directory, delete it. The file will be restored from the Docker image the next time the container is recreated.
+If you make a mistake while editing the file in the ComfyUI directory, delete it. The file will be restored from the Docker image the next time the container is started.
 
 ### Disable the file
 
