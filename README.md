@@ -123,6 +123,13 @@ You can also check the logs from a command prompt/powershell/bash shell:
 docker logs --tail 50 comfyui
 ```
 
+### 6. Open Comfyui:
+
+```text
+http://localhost:8188
+```
+
+
 ## First-Time Setup
 
 Once ComfyUI has finished starting:
