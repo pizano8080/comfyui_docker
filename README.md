@@ -285,6 +285,8 @@ If ComfyUI only needs to be accessed locally, change the Compose file to:
       - --listen
       - 127.0.0.1
 ```
+After changing the Compose file, **rebuild/recreate the container**.
+
 
 ### Option 2 — Allow flagged versions
 
