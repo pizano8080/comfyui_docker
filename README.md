@@ -258,7 +258,7 @@ docker system prune -a --volumes
 ## Known Issues with this install
 
 
-## ComfyUI-Manager Flagged Version Error
+### ComfyUI-Manager Flagged Version Error
 
 When using **ComfyUI-Manager → Update All**, you may see an error similar to:
 
@@ -311,7 +311,7 @@ Restart ComfyUI after changing the setting.
 
 
 
-## [ERROR] Failed to initialize database — `0008_drop_asset_meta` Database Error
+### [ERROR] Failed to initialize database — `0008_drop_asset_meta` Database Error
 
 Running **ComfyUI Manager → Update All** after a fresh install might cause this error:
 
