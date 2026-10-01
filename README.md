@@ -255,9 +255,63 @@ docker compose start
 docker system prune -a --volumes
 ```
 
-## Known Issue with this install
+## Known Issues with this install
 
-### [ERROR] Failed to initialize database — `0008_drop_asset_meta` Database Error
+
+## ComfyUI-Manager Flagged Version Error
+
+When using **ComfyUI-Manager → Update All**, you may see an error similar to:
+
+```text
+[ERROR] Installation of this flagged CNR version is blocked.
+
+ERROR: An error occurred while updating 'comfyui_layerstyle'.
+(res.result=False, res.action=switch-cnr)
+```
+
+This can happen when ComfyUI is running with:
+
+```text
+--listen 0.0.0.0
+```
+
+Manager may block certain flagged CNR node-pack versions when using a non-loopback listener.
+
+### Option 1 — Change the listener
+
+If ComfyUI only needs to be accessed locally, change the Compose file to:
+
+```text
+      - --listen
+      - 127.0.0.1
+```
+
+### Option 2 — Allow flagged versions
+
+For a trusted private network, keep:
+
+```text
+      - --listen
+      - 0.0.0.0
+```
+
+and edit:
+
+```text
+workspace/comfyui/user/__manager/config.ini
+```
+
+Under `[default]`, change:
+
+```ini
+allow_flagged_nodepack_install = true
+```
+
+Restart ComfyUI after changing the setting.
+
+
+
+## [ERROR] Failed to initialize database — `0008_drop_asset_meta` Database Error
 
 Running **ComfyUI Manager → Update All** after a fresh install might cause this error:
 
