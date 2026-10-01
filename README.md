@@ -113,8 +113,11 @@ Wait for the ComfyRegistry cache to finish updating. You should eventually see s
 
     [INFO] Starting server
 
-
     [INFO] To see the GUI go to: http://0.0.0.0:8188
+    FETCH ComfyRegistry Data [DONE]
+    [INFO] [ComfyUI-Manager] default cache updated: https://api.comfy.org/nodes
+    FETCH DATA from: https://raw.githubusercontent.com/ltdrdata/ComfyUI-Manager/main/custom-node-list.json [DONE]
+    [INFO] [ComfyUI-Manager] All startup tasks have been completed.
 ```
 
 You can also check the logs from a command prompt/powershell/bash shell:
@@ -315,7 +318,7 @@ Restart ComfyUI after changing the setting.
 
 ### [ERROR] Failed to initialize database — `0008_drop_asset_meta` Database Error
 
-Running **ComfyUI Manager → Update All** after a fresh install might cause this error:
+Running **ComfyUI Manager → Update All** too soon after a fresh install may cause this error:
 
 ```text
    [ERROR] Failed to initialize database. Please ensure you have installed the latest requirements. 
@@ -323,11 +326,11 @@ Running **ComfyUI Manager → Update All** after a fresh install might cause thi
    revision identified by '0008_drop_asset_meta'
 ```
 
-This issue was **not occurring with other ComfyUI versions** and has been reproduced on a fresh installation using the current ComfyUI installation process.
+After the initial installation, **wait for ComfyUI Manager to finish its initial update/setup before running `Update All`**. Waiting for the Manager update to fully complete may prevent the problem.
 
 ### Recovery
 
-If the error occurs after a fresh installation, or the ComfyUI database contents are not important, delete:
+If the database error does occur, the database will need to be reset. Delete only:
 
 ```text
 /workspace/comfyui/user/comfyui.db
