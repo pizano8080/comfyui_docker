@@ -132,6 +132,15 @@ docker logs --tail 50 comfyui
 http://localhost:8188
 ```
 
+## Why No Python Virtual Environment?
+
+This project does not use a Python `venv` inside the Docker container.
+
+The ComfyUI container is dedicated to ComfyUI and already provides an isolated environment from the host system and other applications. ComfyUI and its Python dependencies are therefore installed directly into the container's Python environment.
+
+You may see a warning from `pip` about running as root. This is expected inside the Docker container and does not affect the host system.
+
+Using a `venv` here would add another layer of Python isolation without providing a practical benefit for this setup.
 
 ## First-Time Setup
 
